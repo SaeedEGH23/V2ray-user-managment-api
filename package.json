@@ -1,0 +1,19 @@
+{
+  "name": "v2ray-user-managment-api",
+  "version": "1.0.0",
+  "description": "Nodejs API for user creat",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaeedEGH23/V2ray-user-managment-api.git"
+  },
+  "author": "Saeed Esmaeilghorbaninezhad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SaeedEGH23/V2ray-user-managment-api/issues"
+  },
+  "homepage": "https://github.com/SaeedEGH23/V2ray-user-managment-api#readme"
+}
