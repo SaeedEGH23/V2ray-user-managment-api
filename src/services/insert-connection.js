@@ -65,7 +65,7 @@ const createInsertRequest = async (data) => {
         }`,
     tag: `inbound-${connectionPortNumber}`,
     sniffing: `{
-          "enabled": false,
+          "enabled": true,
           "destOverride": [
             "http",
             "tls"
