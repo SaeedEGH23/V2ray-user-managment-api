@@ -36,41 +36,10 @@ const createInsertRequest = async (data) => {
     listen: null,
     port: connectionPortNumber,
     protocol: protocol,
-    settings: `{
-          "clients": [
-            {
-              "password": ${password},
-              "flow": "xtls-rprx-direct"
-            }
-          ],
-          "fallbacks": []
-        }`,
-    stream_settings: `{
-          "network": "tcp",
-          "security": "tls",
-          "tlsSettings": {
-            "serverName": ${VPNdomain},
-            "certificates": [
-              {
-                "certificateFile": ${certPath},
-                "keyFile": ${privatePath}
-              }
-            ]
-          },
-          "tcpSettings": {
-            "header": {
-              "type": "none"
-            }
-          }
-        }`,
+    settings: `{"clients":[{"password": ${password},"flow": "xtls-rprx-direct"}],"fallbacks": []}`,
+    stream_settings: `{"network": "tcp","security": "tls","tlsSettings": {"serverName": ${VPNdomain},"certificates": [{"certificateFile": ${certPath},"keyFile": ${privatePath}}]},"tcpSettings": {"header": {"type": "none"}}}`,
     tag: `inbound-${connectionPortNumber}`,
-    sniffing: `{
-          "enabled": true,
-          "destOverride": [
-            "http",
-            "tls"
-          ]
-        }`,
+    sniffing: `{"enabled": true,"destOverride": ["http","tls"]}`,
   });
 
   inbound.save((err, id) => {
