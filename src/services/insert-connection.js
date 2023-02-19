@@ -9,8 +9,6 @@ require("dotenv").config();
 const VPNdomain = process.env.VPN_DOMAIN;
 const certPath = process.env.CERT_PATH || "/root/cert.crt";
 const privatePath = process.env.PRIVATE_PATH || "/root/private.key";
-const startPort = process.env.VPN_START_PORT || 3500;
-const endPort = process.env.VPN_END_POTS || 65000;
 
 let connectionPortNumber, password, traffic, remark, protocol, period;
 
@@ -19,7 +17,7 @@ const createInsertRequest = async (data) => {
   password = crypto.randomBytes(5).toString("hex");
   console.log("check");
 
-  connectionPortNumber = await portGenerator(startPort, endPort);
+  connectionPortNumber = await portGenerator();
   console.log(connectionPortNumber);
   traffic = Number(data.traffic) || 30;
   remark = data.remark + connectionPortNumber;
