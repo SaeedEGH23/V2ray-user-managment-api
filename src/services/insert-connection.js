@@ -25,7 +25,7 @@ const createInsertRequest = async (data) => {
   period = Number(data.period) || 1;
 
   const inbound = new Inbound({
-    userId: 1,
+    user_id: 1,
     up: 0,
     down: 0,
     total: setTraffic("gb", traffic),

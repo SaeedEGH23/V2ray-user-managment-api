@@ -7,7 +7,7 @@ const db = new sqlite3.Database(DBpath);
 db.serialize(() => {
   db.run(`CREATE TABLE IF NOT EXISTS inbounds (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    userId INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
     up INTEGER NOT NULL,
     down INTEGER NOT NULL,
     total INTEGER NOT NULL,
@@ -26,7 +26,7 @@ db.serialize(() => {
 
 class inbounds {
   constructor({
-    userId,
+    user_id,
     up,
     down,
     total,
@@ -41,7 +41,7 @@ class inbounds {
     tag,
     sniffing,
   }) {
-    this.userId = userId;
+    this.user_id = user_id;
     this.up = up;
     this.down = down;
     this.total = total;
@@ -58,10 +58,10 @@ class inbounds {
   }
 
   save(callback) {
-    const sql = `INSERT INTO inbounds (userId, up, down, total, remark, enable, expiryTime, listen, port, protocol, settings, streamSettings, tag, sniffing)
+    const sql = `INSERT INTO inbounds (user_id, up, down, total, remark, enable, expiryTime, listen, port, protocol, settings, streamSettings, tag, sniffing)
                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     const values = [
-      this.userId,
+      this.user_id,
       this.up,
       this.down,
       this.total,
