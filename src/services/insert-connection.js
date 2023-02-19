@@ -51,23 +51,25 @@ const createInsertRequest = async (data) => {
       tlsSettings: {
         serverName: VPNdomain,
         certificates: [
+          `
           {
-            certificateFile: certPath,
-            keyFile: privatePath,
+            'certificateFile': ${certPath},
+            'keyFile': ${privatePath},
           },
+        `,
         ],
       },
-      tcpSettings: {
+      tcpSettings: `{
         header: {
           type: "none",
         },
-      },
+      }`,
     },
-    tag: inbound - connectionPortNumber,
-    sniffing: {
+    tag: `inbound-connectionPortNumber`,
+    sniffing: `{
       enabled: false,
       destOverride: ["http", "tls"],
-    },
+    }`,
   });
 
   inbound.save((err, id) => {
