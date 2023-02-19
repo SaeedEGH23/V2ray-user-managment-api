@@ -123,13 +123,14 @@ class inbounds {
 
 const searchId = async function (idNum) {
   // query the database
-  db.get("SELECT * FROM inbound WHERE id = ?", [idNum], (err, row) => {
+  db.get(`SELECT * FROM inbounds WHERE id = ?`, [idNum], (err, row) => {
     if (err) {
       console.error(err.message);
       return;
     }
     // row contains the matching row from the database
     console.log(row);
+    console.log("this it type:  ", typeof row);
   });
 
   // close the database connection
