@@ -13,12 +13,12 @@ db.serialize(() => {
     total INTEGER NOT NULL,
     remark TEXT NOT NULL,
     enable BOOLEAN NOT NULL,
-    expiryTime INTEGER NOT NULL,
+    expiry_time INTEGER NOT NULL,
     listen NULL,
     port INTEGER NOT NULL UNIQUE,
     protocol TEXT NOT NULL CHECK(protocol IN ('tcp', 'kcp', 'ws', 'h2', 'quic', 'trojan', 'vmess')),
     settings TEXT NOT NULL,
-    streamSettings TEXT NOT NULL,
+    stream_settings TEXT NOT NULL,
     tag TEXT NOT NULL UNIQUE,
     sniffing TEXT NOT NULL
   )`);
@@ -32,12 +32,12 @@ class inbounds {
     total,
     remark,
     enable,
-    expiryTime,
+    expiry_time,
     listen,
     port,
     protocol,
     settings,
-    streamSettings,
+    stream_settings,
     tag,
     sniffing,
   }) {
@@ -47,18 +47,18 @@ class inbounds {
     this.total = total;
     this.remark = remark;
     this.enable = enable;
-    this.expiryTime = expiryTime;
+    this.expiry_time = expiry_time;
     this.listen = listen;
     this.port = port;
     this.protocol = protocol;
     this.settings = settings;
-    this.streamSettings = streamSettings;
+    this.stream_settings = stream_settings;
     this.tag = tag;
     this.sniffing = sniffing;
   }
 
   save(callback) {
-    const sql = `INSERT INTO inbounds (user_id, up, down, total, remark, enable, expiryTime, listen, port, protocol, settings, streamSettings, tag, sniffing)
+    const sql = `INSERT INTO inbounds (user_id, up, down, total, remark, enable, expiry_time, listen, port, protocol, settings, stream_settings, tag, sniffing)
                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     const values = [
       this.user_id,
@@ -67,12 +67,12 @@ class inbounds {
       this.total,
       this.remark,
       this.enable,
-      this.expiryTime,
+      this.expiry_time,
       this.listen,
       this.port,
       this.protocol,
       this.settings,
-      this.streamSettings,
+      this.stream_settings,
       this.tag,
       this.sniffing,
     ];

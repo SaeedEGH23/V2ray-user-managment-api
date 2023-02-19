@@ -31,7 +31,7 @@ const createInsertRequest = async (data) => {
     total: setTraffic("gb", traffic),
     remark: remark,
     enable: 1,
-    expiryTime: timeSet(period),
+    expiry_time: timeSet(period),
     listen: null,
     port: connectionPortNumber,
     protocol: protocol,
@@ -44,7 +44,7 @@ const createInsertRequest = async (data) => {
           ],
           "fallbacks": []
         }`,
-    streamSettings: `{
+    stream_settings: `{
           "network": "tcp",
           "security": "tls",
           "tlsSettings": {
