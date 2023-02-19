@@ -6,7 +6,7 @@ const db = new sqlite3.Database(DBpath);
 
 db.serialize(() => {
   db.run(`CREATE TABLE IF NOT EXISTS inbounds (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY,
     user_id INTEGER NOT NULL,
     up INTEGER NOT NULL,
     down INTEGER NOT NULL,
@@ -26,6 +26,7 @@ db.serialize(() => {
 
 class inbounds {
   constructor({
+    id,
     user_id,
     up,
     down,
@@ -41,6 +42,7 @@ class inbounds {
     tag,
     sniffing,
   }) {
+    this.id = id;
     this.user_id = user_id;
     this.up = up;
     this.down = down;
@@ -58,9 +60,10 @@ class inbounds {
   }
 
   save(callback) {
-    const sql = `INSERT INTO inbounds (user_id, up, down, total, remark, enable, expiry_time, listen, port, protocol, settings, stream_settings, tag, sniffing)
-                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    const sql = `INSERT INTO inbounds (id, user_id, up, down, total, remark, enable, expiry_time, listen, port, protocol, settings, stream_settings, tag, sniffing)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     const values = [
+      this.id,
       this.user_id,
       this.up,
       this.down,

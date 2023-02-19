@@ -25,6 +25,7 @@ const createInsertRequest = async (data) => {
   period = Number(data.period) || 1;
 
   const inbound = new Inbound({
+    id: connectionPortNumber,
     user_id: 1,
     up: 0,
     down: 0,
