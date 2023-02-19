@@ -14,7 +14,7 @@ async function checkFree(newPort) {
 }
 
 const portGenerator = async function report(from, to) {
-  var random_int = Math.floor(Math.random() * (to - from + 1)) + from;
+  var random_int = Math.floor(Math.random() * (65000 - 3500 + 1)) + 3500;
   let checkBusyDb = await findByPort(random_int);
   let checkBusySh = await checkFree(random_int);
   console.log(checkBusySh, checkBusyDb);
