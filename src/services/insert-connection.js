@@ -25,7 +25,7 @@ const createInsertRequest = async (data) => {
   period = Number(data.period) || 1;
 
   const inbound = new Inbound({
-    id: (connectionPortNumber + remark).toString(),
+    id: connectionPortNumber,
     user_id: 1,
     up: 0,
     down: 0,
@@ -44,7 +44,7 @@ const createInsertRequest = async (data) => {
             }
           ],
           "fallbacks": []
-        }`.toString(),
+        }`,
     stream_settings: `{
           "network": "tcp",
           "security": "tls",
@@ -62,8 +62,8 @@ const createInsertRequest = async (data) => {
               "type": "none"
             }
           }
-        }`.toString(),
-    tag: `inbound-${connectionPortNumber}`.toString(),
+        }`,
+    tag: `inbound-${connectionPortNumber}`,
     sniffing: '{"enabled": false,"destOverride": ["http","tls"]}',
   });
 
