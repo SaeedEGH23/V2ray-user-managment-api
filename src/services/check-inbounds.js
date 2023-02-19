@@ -1,7 +1,7 @@
 const Inbound = require("../model/inbounds.js");
 
-const checkUser = async (idNum) => {
-  Inbound.searchId(1);
-  console.log("did it --------");
-};
-checkUser;
+async function check(idNum) {
+  let x = await Inbound.searchId(1);
+  console.log("did it --------", x);
+}
+check;
