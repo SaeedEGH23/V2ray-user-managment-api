@@ -24,6 +24,11 @@ const createInsertRequest = async (data) => {
   protocol = data.protocol || "trojan";
   period = Number(data.period) || 1;
 
+  let setting = `{ "clients": [ { "password": ${password}, "flow": "xtls-rprx-direct" } ], "fallbacks": [] }`,
+    stream_setting = `{ "network": "tcp", "security": "tls", "tlsSettings": { "serverName": ${VPNdomain}, "certificates": [ { "certificateFile": ${certPath}, "keyFile": ${privatePath} } ] }, "tcpSettings": { "header": { "type": "none" } } }`,
+    tagStapm = `inbound-${connectionPortNumber}`,
+    snif = '{"enabled": false,"destOverride": ["http","tls"]}';
+
   const inbound = new Inbound({
     id: connectionPortNumber,
     user_id: 1,
@@ -36,10 +41,10 @@ const createInsertRequest = async (data) => {
     listen: null,
     port: connectionPortNumber,
     protocol: protocol.toString(),
-    settings: `{ "clients": [ { "password": ${password}, "flow": "xtls-rprx-direct" } ], "fallbacks": [] }`,
-    stream_settings: `{ "network": "tcp", "security": "tls", "tlsSettings": { "serverName": ${VPNdomain}, "certificates": [ { "certificateFile": ${certPath}, "keyFile": ${privatePath} } ] }, "tcpSettings": { "header": { "type": "none" } } }`,
-    tag: `inbound-${connectionPortNumber}`,
-    sniffing: '{"enabled": false,"destOverride": ["http","tls"]}',
+    settings: setting.toString(),
+    stream_settings: stream_setting.toString(),
+    tag: tagStapm.toString(),
+    sniffing: snif,
   });
 
   inbound.save((err, id) => {
