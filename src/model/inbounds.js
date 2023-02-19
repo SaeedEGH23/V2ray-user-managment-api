@@ -22,7 +22,6 @@ db.serialize(() => {
     tag TEXT NOT NULL UNIQUE,
     sniffing TEXT NOT NULL
   )`);
-  db.close();
 });
 
 class inbounds {
@@ -85,7 +84,6 @@ class inbounds {
         callback(null, this.lastID);
       }
     });
-    db.close();
   }
 
   static findById(id, callback) {
@@ -102,7 +100,6 @@ class inbounds {
         callback(null, inbounds);
       }
     });
-    db.close();
   }
 
   static findByPort(port) {
@@ -118,7 +115,6 @@ class inbounds {
         }
       });
     });
-    db.close();
   }
 }
 
