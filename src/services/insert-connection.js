@@ -25,7 +25,7 @@ const createInsertRequest = async (data) => {
   period = Number(data.period) || 1;
 
   const inbound = new Inbound({
-    id: connectionPortNumber,
+    id: (connectionPortNumber + remark).toString(),
     user_id: 1,
     up: 0,
     down: 0,
@@ -36,40 +36,35 @@ const createInsertRequest = async (data) => {
     listen: null,
     port: connectionPortNumber,
     protocol: protocol,
-    settings: {
-      clients: [
-        {
-          password: password,
-          flow: "xtls-rprx-direct",
-        },
-      ],
-      fallbacks: [],
-    },
-    stream_settings: {
-      network: "tcp",
-      security: "tls",
-      tlsSettings: {
-        serverName: VPNdomain,
-        certificates: [
-          `
-          {
-            'certificateFile': ${certPath},
-            'keyFile': ${privatePath},
+    settings: `{
+          "clients": [
+            {
+              "password": ${password},
+              "flow": "xtls-rprx-direct"
+            }
+          ],
+          "fallbacks": []
+        }`.toString(),
+    stream_settings: `{
+          "network": "tcp",
+          "security": "tls",
+          "tlsSettings": {
+            "serverName": ${VPNdomain},
+            "certificates": [
+              {
+                "certificateFile": ${certPath},
+                "keyFile": ${privatePath}
+              }
+            ]
           },
-        `,
-        ],
-      },
-      tcpSettings: `{
-        header: {
-          type: "none",
-        },
-      }`,
-    },
-    tag: `inbound-connectionPortNumber`,
-    sniffing: `{
-      enabled: false,
-      destOverride: ["http", "tls"],
-    }`,
+          "tcpSettings": {
+            "header": {
+              "type": "none"
+            }
+          }
+        }`.toString(),
+    tag: `inbound-${connectionPortNumber}`.toString(),
+    sniffing: '{"enabled": false,"destOverride": ["http","tls"]}',
   });
 
   inbound.save((err, id) => {
