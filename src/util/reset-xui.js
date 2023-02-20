@@ -18,5 +18,5 @@ const resetX = () => {
     console.log(`cant restart x-ui cause ${err}`);
   }
 };
-resetX();
+
 module.exports = resetX;
