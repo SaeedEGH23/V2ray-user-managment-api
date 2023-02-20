@@ -8,15 +8,9 @@ const userController = async (data) => {
     let userData = await createInsertRequest(data);
     console.log("userdata is here : ", userData);
 
-    let connectionLink = linkMaker(
-      userData.protocols,
-      userData.password,
-      userData.VPNdomain,
-      userData.connectionPortNumber,
-      userData.remark
-    );
+    let connectionLink = await linkMaker(userData);
 
-    let status = firewallAllow(userData.connectionPortNumber);
+    let status = await firewallAllow(userData.connectionPortNumber);
     resetXui();
     status += "user created !";
     return connectionLink;

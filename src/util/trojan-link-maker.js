@@ -1,5 +1,5 @@
-const trojanLinkeMaker = (protocol, password, domain, port, remark) => {
-  return `${protocol}://${password}@${domain}:${port}?security=tls&type=tcp#${remark}`;
+const trojanLinkeMaker = (connectionData) => {
+  return `${connectionData.protocol}://${connectionData.pass}@${connectionData.domain}:${connectionData.cPort}?security=tls&type=tcp#${connectionData.name}`;
 };
 
 module.exports = trojanLinkeMaker;
