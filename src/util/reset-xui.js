@@ -1,24 +1,30 @@
 const { spawn } = require("child_process");
 
-// Spawn the shell app
-
-const app = spawn("x-ui");
-
-// Serve "10" to the app
 const resetX = async () => {
-  try {
-    await app.stdin.write("10");
+  return new Promise((resolve, reject) => {
+    const app = spawn("x-ui");
 
-    // After 2 seconds, send "\n" twice
+    // Listen for the "close" event of the stdin stream
+    app.stdin.on("close", () => {
+      console.log("end");
+      resolve(200);
+    });
+
+    // Write "10" to the stdin stream
+    app.stdin.write("10");
+
+    // After 2 seconds, write "\n" twice
     setTimeout(() => {
       app.stdin.write("\n");
       app.stdin.write("\n");
-      return 200;
     }, 7000);
-  } catch (err) {
-    console.log(`cant restart x-ui cause ${err}`);
-    return err;
-  }
+
+    // Handle errors
+    app.on("error", (err) => {
+      console.log(`cant restart x-ui cause ${err}`);
+      reject(err);
+    });
+  });
 };
 
 module.exports = resetX;
