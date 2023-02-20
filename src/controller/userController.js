@@ -6,8 +6,8 @@ const firewallAllow = require("../util/firewall-allow.js");
 const userController = async (data) => {
   try {
     let userData = await createInsertRequest(data);
-    console.log(userData);
-    console.log(typeof userData);
+    console.log("userdata is here : ", userData);
+
     let connectionLink = await linkMaker(
       userData.protocols,
       userData.password,
