@@ -80,28 +80,6 @@ const createInsertRequest = async (data) => {
     }
   });
 
-  // function saveInbound(inbound) {
-  //   return new Promise((resolve, reject) => {
-  //     inbound.save((err, id) => {
-  //       if (err) {
-  //         console.error(err);
-  //         reject(err);
-  //       } else {
-  //         // console.log(`Inserted Inbound instance with ID ${id}`);
-  //         resolve(id);
-  //       }
-  //     });
-  //   });
-  // }
-
-  // saveInbound(inbound)
-  //   .then((id) => {
-  //     console.log(`Saved Inbound instance with ID ${id}`);
-  //   })
-  //   .catch((err) => {
-  //     console.error(err);
-  //     return err;
-  //   });
   return {
     protocol: protocols,
     pass: password,
