@@ -1,6 +1,6 @@
 const resetX = require("../util/reset-xui.js");
-const test = async () => {
-  let stat = await resetX();
+const test = () => {
+  let stat = resetX();
   return stat;
 };
 test().then((stat) => {
