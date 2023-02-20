@@ -1,16 +1,13 @@
-const { exec } = require("child_process");
+const { spawn } = require("child_process");
 
-// Execute shell command
+// Spawn the shell app
+const app = spawn("your-shell-app");
 
-const exeXUI = () => {
-  exec('echo "10\n\n" | x-ui', (err, stdout, stderr) => {
-    if (err) {
-      console.error(`Error executing command: ${err}`);
-      return;
-    }
+// Serve "10" to the app
+app.stdin.write("10");
 
-    console.log(`Command output: ${stdout}`);
-  });
-};
-
-module.exports = exeXUI;
+// After 2 seconds, send "\n" twice
+setTimeout(() => {
+  app.stdin.write("\n");
+  app.stdin.write("\n");
+}, 2000);
