@@ -3,7 +3,7 @@ const timeSet = require("../util/timesetting.js");
 const crypto = require("crypto");
 const setTraffic = require("../util/traffic.js");
 const portGenerator = require("../util/portgenerator.js");
-const linkMaker = require("../util/trojan-link-maker.js");
+
 require("dotenv").config();
 
 const VPNdomain = process.env.VPN_DOMAIN;
@@ -21,7 +21,7 @@ const createInsertRequest = async (data) => {
   console.log(connectionPortNumber);
   traffic = Number(data.traffic) || 30;
   remark = data.remark + connectionPortNumber;
-  protocol = data.protocol || "trojan";
+  protocols = data.protocol || "trojan";
   period = Number(data.period) || 1;
 
   const inbound = new Inbound({
@@ -35,7 +35,7 @@ const createInsertRequest = async (data) => {
     expiry_time: timeSet(period),
     listen: "",
     port: connectionPortNumber,
-    protocol: protocol,
+    protocol: protocols,
     settings: JSON.stringify({
       clients: [
         {
@@ -76,7 +76,7 @@ const createInsertRequest = async (data) => {
       return err;
     } else {
       console.log(`Inserted Inbound instance with ID ${id}`);
-      return { protocol, password, VPNdomain, connectionPortNumber, remark };
+      return { protocols, password, VPNdomain, connectionPortNumber, remark };
     }
   });
 };

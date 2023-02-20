@@ -9,7 +9,7 @@ const userController = async (data) => {
     console.log(userData);
     console.log(typeof userData);
     let connectionLink = await linkMaker(
-      userData.protocol,
+      userData.protocols,
       userData.password,
       userData.VPNdomain,
       userData.connectionPortNumber,
