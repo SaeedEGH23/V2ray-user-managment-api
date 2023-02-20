@@ -3,6 +3,7 @@ const timeSet = require("../util/timesetting.js");
 const crypto = require("crypto");
 const setTraffic = require("../util/traffic.js");
 const portGenerator = require("../util/portgenerator.js");
+const { resolve } = require("path");
 
 require("dotenv").config();
 
@@ -70,15 +71,45 @@ const createInsertRequest = async (data) => {
     }),
   });
 
-  inbound.save((err, id) => {
-    if (err) {
+  // inbound.save((err, id) => {
+  //   if (err) {
+  //     console.error(err);
+  //     return err;
+  //   } else {
+  //     console.log(`Inserted Inbound instance with ID ${id}`);
+  //     return { protocols, password, VPNdomain, connectionPortNumber, remark };
+  //   }
+  // })
+
+  function saveInbound(inbound) {
+    return new Promise((resolve, reject) => {
+      inbound.save((err, id) => {
+        if (err) {
+          console.error(err);
+          reject(err);
+        } else {
+          // console.log(`Inserted Inbound instance with ID ${id}`);
+          resolve(id);
+        }
+      });
+    });
+  }
+
+  saveInbound(inbound)
+    .then((id) => {
+      console.log(`Saved Inbound instance with ID ${id}`);
+      return {
+        protocol: protocols,
+        pass: password,
+        domain: VPNdomain,
+        cPort: connectionPortNumber,
+        name: remark,
+      };
+    })
+    .catch((err) => {
       console.error(err);
       return err;
-    } else {
-      console.log(`Inserted Inbound instance with ID ${id}`);
-      return { protocols, password, VPNdomain, connectionPortNumber, remark };
-    }
-  });
+    });
 };
 
 module.exports = createInsertRequest;
