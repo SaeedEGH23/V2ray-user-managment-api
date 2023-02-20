@@ -71,24 +71,14 @@ const createInsertRequest = async (data) => {
     }),
   });
 
-  inbound
-    .save((err, id) => {
-      if (err) {
-        console.error(err);
-        return err;
-      } else {
-        console.log(`Inserted Inbound instance with ID ${id}`);
-      }
-    })
-    .then(() => {
-      return {
-        protocol: protocols,
-        pass: password,
-        domain: VPNdomain,
-        cPort: connectionPortNumber,
-        name: remark,
-      };
-    });
+  inbound.save((err, id) => {
+    if (err) {
+      console.error(err);
+      return err;
+    } else {
+      console.log(`Inserted Inbound instance with ID ${id}`);
+    }
+  });
 
   // function saveInbound(inbound) {
   //   return new Promise((resolve, reject) => {
@@ -112,6 +102,13 @@ const createInsertRequest = async (data) => {
   //     console.error(err);
   //     return err;
   //   });
+  return {
+    protocol: protocols,
+    pass: password,
+    domain: VPNdomain,
+    cPort: connectionPortNumber,
+    name: remark,
+  };
 };
 
 module.exports = createInsertRequest;
