@@ -71,22 +71,21 @@ const createInsertRequest = async (data) => {
     }),
   });
 
-  inbound.save((err, id) => {
+  await inbound.save((err, id) => {
     if (err) {
       console.error(err);
       return err;
     } else {
       console.log(`Inserted Inbound instance with ID ${id}`);
+      return {
+        protocol: protocols,
+        pass: password,
+        domain: VPNdomain,
+        cPort: connectionPortNumber,
+        name: remark,
+      };
     }
   });
-
-  return {
-    protocol: protocols,
-    pass: password,
-    domain: VPNdomain,
-    cPort: connectionPortNumber,
-    name: remark,
-  };
 };
 
 module.exports = createInsertRequest;
