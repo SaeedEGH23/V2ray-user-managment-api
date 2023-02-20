@@ -76,13 +76,9 @@ const createInsertRequest = async (data) => {
       return err;
     } else {
       console.log(`Inserted Inbound instance with ID ${id}`);
-      console.log(
-        linkMaker(protocol, password, VPNdomain, connectionPortNumber, remark)
-      );
+      return { protocol, password, VPNdomain, connectionPortNumber, remark };
     }
   });
-
-  return linkMaker(protocol, password, VPNdomain, connectionPortNumber, remark);
 };
 
 module.exports = createInsertRequest;
