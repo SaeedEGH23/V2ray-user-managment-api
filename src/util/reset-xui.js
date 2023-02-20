@@ -6,23 +6,26 @@ const resetX = async () => {
 
     // Listen for the "close" event of the stdin stream
     app.stdin.on("close", () => {
-      console.log("end");
+      console.log("stdin close event fired");
+      console.log("app process status:", app.exitCode);
+      app.kill();
       resolve(200);
     });
 
     // Write "10" to the stdin stream
     app.stdin.write("10");
 
-    // After 2 seconds, write "\n" twice
-    setTimeout(() => {
-      app.stdin.write("\n");
-      app.stdin.write("\n");
-    }, 7000);
-
     // Handle errors
     app.on("error", (err) => {
       console.log(`cant restart x-ui cause ${err}`);
       reject(err);
+    });
+
+    // Listen for the "exit" event of the child process
+    app.on("exit", (code, signal) => {
+      console.log("app exit event fired");
+      console.log("exit code:", code);
+      console.log("signal:", signal);
     });
   });
 };
