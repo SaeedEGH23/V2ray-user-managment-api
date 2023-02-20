@@ -14,7 +14,7 @@ const resetX = async () => {
       app.stdin.write("\n");
       app.stdin.write("\n");
       return 200;
-    }, 2000);
+    }, 7000);
   } catch (err) {
     console.log(`cant restart x-ui cause ${err}`);
     return err;
