@@ -14,9 +14,9 @@ const privatePath = process.env.PRIVATE_PATH || "/root/private.key";
 let connectionPortNumber, password, traffic, remark, protocol, period;
 
 const createInsertRequest = async (data) => {
-  console.log(VPNdomain, certPath, privatePath);
+  // console.log(VPNdomain, certPath, privatePath);
   password = crypto.randomBytes(5).toString("hex");
-  console.log("check");
+  // console.log("check");
 
   connectionPortNumber = await portGenerator();
   console.log(connectionPortNumber);
@@ -98,18 +98,18 @@ const createInsertRequest = async (data) => {
   saveInbound(inbound)
     .then((id) => {
       console.log(`Saved Inbound instance with ID ${id}`);
-      return {
-        protocol: protocols,
-        pass: password,
-        domain: VPNdomain,
-        cPort: connectionPortNumber,
-        name: remark,
-      };
     })
     .catch((err) => {
       console.error(err);
       return err;
     });
+  return {
+    protocol: protocols,
+    pass: password,
+    domain: VPNdomain,
+    cPort: connectionPortNumber,
+    name: remark,
+  };
 };
 
 module.exports = createInsertRequest;
