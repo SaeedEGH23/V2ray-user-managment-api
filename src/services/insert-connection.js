@@ -22,7 +22,7 @@ const createInsertRequest = async (data) => {
   console.log(connectionPortNumber);
   traffic = Number(data.traffic) || 30;
   remark = data.remark + connectionPortNumber;
-  protocols = data.protocol || "trojan";
+  protocol = data.protocol || "trojan";
   period = Number(data.period) || 1;
 
   const inbound = new Inbound({
@@ -36,7 +36,7 @@ const createInsertRequest = async (data) => {
     expiry_time: timeSet(period),
     listen: "",
     port: connectionPortNumber,
-    protocol: protocols,
+    protocol: protocol,
     settings: JSON.stringify({
       clients: [
         {
@@ -74,7 +74,7 @@ const createInsertRequest = async (data) => {
   await inbound.save();
 
   return {
-    protocol: protocols,
+    protocol: protocol,
     pass: password,
     domain: VPNdomain,
     cPort: connectionPortNumber,
