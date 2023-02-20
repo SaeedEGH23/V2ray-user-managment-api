@@ -11,4 +11,4 @@ const resetX = async () => {
   });
 };
 
-resetX();
+module.exports = resetX;
