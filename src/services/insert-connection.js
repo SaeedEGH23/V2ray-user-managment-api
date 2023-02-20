@@ -71,14 +71,7 @@ const createInsertRequest = async (data) => {
     }),
   });
 
-  await inbound.save((err, id) => {
-    if (err) {
-      console.error(err);
-      return err;
-    } else {
-      console.log(`Inserted Inbound instance with ID ${id}`);
-    }
-  });
+  await inbound.save();
 
   return {
     protocol: protocols,
