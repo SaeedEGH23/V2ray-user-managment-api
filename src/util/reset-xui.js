@@ -5,17 +5,19 @@ const { spawn } = require("child_process");
 const app = spawn("x-ui");
 
 // Serve "10" to the app
-const resetX = () => {
+const resetX = async () => {
   try {
-    app.stdin.write("10");
+    await app.stdin.write("10");
 
     // After 2 seconds, send "\n" twice
     setTimeout(() => {
       app.stdin.write("\n");
       app.stdin.write("\n");
+      return 200;
     }, 2000);
   } catch (err) {
     console.log(`cant restart x-ui cause ${err}`);
+    return err;
   }
 };
 
