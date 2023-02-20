@@ -1,8 +1,10 @@
 const resetX = require("../util/reset-xui.js");
-const test = () => {
-  let stat = resetX();
-  return stat;
-};
-test().then((stat) => {
-  console.log(stat);
-});
+
+resetX()
+  .then((resolve, reject) => {
+    console.log(resolve);
+  })
+  .then(console.log("good"))
+  .catch((err) => {
+    console.log(err);
+  });
