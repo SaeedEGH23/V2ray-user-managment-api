@@ -7,7 +7,7 @@ const resetX = async () => {
   // Send "10" to the process's stdin stream
   app.stdin.write("10\n");
   setTimeout(() => {
-    app.stdin.write("^c\n");
+    app.stdin.write("^C");
     return 200;
   }, 4000);
   // Wait for the process to exit and resolve with its status code
