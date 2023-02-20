@@ -6,7 +6,8 @@ const firewallAllow = require("../util/firewall-allow.js");
 const userController = async (data) => {
   try {
     let userData = await createInsertRequest(data);
-
+    console.log(userData);
+    console.log(typeof userData);
     let connectionLink = await linkMaker(
       userData.protocol,
       userData.password,
@@ -14,8 +15,7 @@ const userController = async (data) => {
       userData.connectionPortNumber,
       userData.remark
     );
-    console.log(userData);
-    console.log(typeof userData);
+
     let status = await firewallAllow(userData.connectionPortNumber);
     resetXui();
     status += "user created !";
