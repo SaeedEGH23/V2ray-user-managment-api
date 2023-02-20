@@ -71,45 +71,47 @@ const createInsertRequest = async (data) => {
     }),
   });
 
-  // inbound.save((err, id) => {
-  //   if (err) {
+  inbound
+    .save((err, id) => {
+      if (err) {
+        console.error(err);
+        return err;
+      } else {
+        console.log(`Inserted Inbound instance with ID ${id}`);
+      }
+    })
+    .then(() => {
+      return {
+        protocol: protocols,
+        pass: password,
+        domain: VPNdomain,
+        cPort: connectionPortNumber,
+        name: remark,
+      };
+    });
+
+  // function saveInbound(inbound) {
+  //   return new Promise((resolve, reject) => {
+  //     inbound.save((err, id) => {
+  //       if (err) {
+  //         console.error(err);
+  //         reject(err);
+  //       } else {
+  //         // console.log(`Inserted Inbound instance with ID ${id}`);
+  //         resolve(id);
+  //       }
+  //     });
+  //   });
+  // }
+
+  // saveInbound(inbound)
+  //   .then((id) => {
+  //     console.log(`Saved Inbound instance with ID ${id}`);
+  //   })
+  //   .catch((err) => {
   //     console.error(err);
   //     return err;
-  //   } else {
-  //     console.log(`Inserted Inbound instance with ID ${id}`);
-  //     return { protocols, password, VPNdomain, connectionPortNumber, remark };
-  //   }
-  // })
-
-  function saveInbound(inbound) {
-    return new Promise((resolve, reject) => {
-      inbound.save((err, id) => {
-        if (err) {
-          console.error(err);
-          reject(err);
-        } else {
-          // console.log(`Inserted Inbound instance with ID ${id}`);
-          resolve(id);
-        }
-      });
-    });
-  }
-
-  saveInbound(inbound)
-    .then((id) => {
-      console.log(`Saved Inbound instance with ID ${id}`);
-    })
-    .catch((err) => {
-      console.error(err);
-      return err;
-    });
-  return {
-    protocol: protocols,
-    pass: password,
-    domain: VPNdomain,
-    cPort: connectionPortNumber,
-    name: remark,
-  };
+  //   });
 };
 
 module.exports = createInsertRequest;
