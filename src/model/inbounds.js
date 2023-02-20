@@ -59,33 +59,38 @@ class inbounds {
     this.sniffing = sniffing;
   }
 
-  save(callback) {
-    const sql = `INSERT INTO inbounds (id, user_id, up, down, total, remark, enable, expiry_time, listen, port, protocol, settings, stream_settings, tag, sniffing)
+  async save() {
+    return new Promise((resolve, reject) => {
+      const sql = `INSERT INTO inbounds (id, user_id, up, down, total, remark, enable, expiry_time, listen, port, protocol, settings, stream_settings, tag, sniffing)
                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-    const values = [
-      this.id,
-      this.user_id,
-      this.up,
-      this.down,
-      this.total,
-      this.remark,
-      this.enable,
-      this.expiry_time,
-      this.listen,
-      this.port,
-      this.protocol,
-      this.settings,
-      this.stream_settings,
-      this.tag,
-      this.sniffing,
-    ];
+      const values = [
+        this.id,
+        this.user_id,
+        this.up,
+        this.down,
+        this.total,
+        this.remark,
+        this.enable,
+        this.expiry_time,
+        this.listen,
+        this.port,
+        this.protocol,
+        this.settings,
+        this.stream_settings,
+        this.tag,
+        this.sniffing,
+      ];
 
-    db.run(sql, values, function (err) {
-      if (err) {
-        callback(err);
-      } else {
-        callback(null, this.lastID);
-      }
+      db.run(sql, values, (err) => {
+        if (err) {
+          // callback(err);
+          return reject(err.message);
+        } else {
+          // callback(null, this.lastID);
+          console.log(`new Data inserted with id: ${this.id}`);
+          return resolve(this.id);
+        }
+      });
     });
   }
 
@@ -105,14 +110,14 @@ class inbounds {
     });
   }
 
-  static findByPort(port) {
+  static async findByPort(port) {
     const sql = `SELECT * FROM inbounds WHERE port = ?`;
     const values = port;
 
     return new Promise((resolve, reject) => {
       db.get(sql, values, function (err, row) {
         if (err) {
-          reject(err);
+          reject(err.message);
         } else {
           resolve(row);
         }
