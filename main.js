@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const userController = require("./src/controller/userController.js");
+const connections = require("./src/controller/connections.js");
 require("dotenv").config();
 const port = process.env.LISTEN_PORT;
 
@@ -15,7 +15,8 @@ app.post("/createUser", (req, res) => {
   // route to controller
   const data = req.body;
 
-  userController(data)
+  connections
+    .createConnection(data)
     .then((userLink) => {
       res.status(200).send(userLink);
       console.log(`userLink: ${userLink}`);
@@ -32,10 +33,15 @@ app.post("/reSubscribe", (req, res) => {
   res.status(200).send("ok");
 });
 
-app.post("/remainCheck", (req, res) => {
+app.post("/remainCheck", async (req, res) => {
   // route to controller
   const data = req.body;
-  res.status(200).send("ok");
+  try {
+    const retData = await connections.connectionData(data);
+    res.status(200).send(retData);
+  } catch (err) {
+    res.status(500).send(`An erro occurred while check data ${err}`);
+  }
 });
 
 // start listening
