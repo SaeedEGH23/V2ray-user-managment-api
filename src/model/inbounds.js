@@ -140,6 +140,20 @@ class inbounds {
   }
 
   static async getTotalInbounds() {
+    const sql = `SELECT COUNT(*) FROM inbounds`;
+
+    return new Promise((resolve, reject) => {
+      db.get(sql, function (err, row) {
+        if (err) {
+          reject(err.message);
+        } else {
+          resolve(row);
+        }
+      });
+    });
+  }
+
+  static async getTotalEnableInbounds() {
     const sql = `SELECT COUNT(*) FROM inbounds WHERE enable = 1`;
 
     return new Promise((resolve, reject) => {
