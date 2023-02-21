@@ -44,6 +44,13 @@ app.post("/remainCheck", async (req, res) => {
   }
 });
 
+// Handle 404
+app.all("*", (req, res) => {
+  res.status(404).send({
+    message: "Not Found",
+  });
+});
+
 // start listening
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
