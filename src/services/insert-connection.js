@@ -70,16 +70,18 @@ const createInsertRequest = async (data) => {
       destOverride: ["http", "tls"],
     }),
   });
-
-  await inbound.save();
-
-  return {
-    protocol: protocol,
-    pass: password,
-    domain: VPNdomain,
-    cPort: connectionPortNumber,
-    name: remark,
-  };
+  try {
+    await inbound.save();
+    return {
+      protocol: protocol,
+      pass: password,
+      domain: VPNdomain,
+      cPort: connectionPortNumber,
+      name: remark,
+    };
+  } catch (err) {
+    return err;
+  }
 };
 
 module.exports = createInsertRequest;
