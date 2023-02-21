@@ -94,25 +94,39 @@ class inbounds {
     });
   }
 
-  static findById(id, callback) {
+  static async findById(id) {
     const sql = `SELECT * FROM inbounds WHERE id = ?`;
-    const values = [id];
+    const values = id;
 
-    db.get(sql, values, function (err, row) {
-      if (err) {
-        callback(err);
-      } else if (!row) {
-        callback(null, null);
-      } else {
-        const inbounds = new inbounds(row);
-        callback(null, inbounds);
-      }
+    return new Promise((resolve, reject) => {
+      db.get(sql, values, function (err, row) {
+        if (err) {
+          reject(err.message);
+        } else {
+          resolve(row);
+        }
+      });
     });
   }
 
   static async findByPort(port) {
     const sql = `SELECT * FROM inbounds WHERE port = ?`;
     const values = port;
+
+    return new Promise((resolve, reject) => {
+      db.get(sql, values, function (err, row) {
+        if (err) {
+          reject(err.message);
+        } else {
+          resolve(row);
+        }
+      });
+    });
+  }
+
+  static async findByRemark(remark) {
+    const sql = `SELECT * FROM inbounds WHERE remark = ?`;
+    const values = remark;
 
     return new Promise((resolve, reject) => {
       db.get(sql, values, function (err, row) {
