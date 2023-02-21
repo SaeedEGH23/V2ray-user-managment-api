@@ -147,7 +147,8 @@ class inbounds {
         if (err) {
           reject(err.message);
         } else {
-          resolve(row);
+          const { "COUNT(*)": count } = row;
+          resolve(count);
         }
       });
     });
@@ -161,7 +162,8 @@ class inbounds {
         if (err) {
           reject(err.message);
         } else {
-          resolve(row);
+          const { "COUNT(*)": count } = row;
+          resolve(count);
         }
       });
     });
