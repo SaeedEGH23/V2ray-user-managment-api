@@ -26,25 +26,28 @@ The API currently handles two requests:
 
 To create a trojan connection account, send a POST request to `serverip:port/createUser` with the following object:
 
-````json
+```json
 {
- "remark": "connectionname",
- "period": 1,
- "protocol": "trojan",
- "traffic": 30
+  "remark": "connectionname",
+  "period": 1,
+  "protocol": "trojan",
+  "traffic": 30
 }
+```
 
 Remark will change when the account is created. Period time is in days, and if set to 1, means 30 days remain until expiration. Protocol currently only supports trojan. Traffic is defined in GB.
 
 The API will return the trojan link.
 
 ### Remain Check
+
 To retrieve connection data such as remaining time and traffic, send a POST request to `serverip:port/remainCheck` with the following object:
 
 ```json
 {
-    "cname": "connectionname"
+  "cname": "connectionname"
 }
+```
 
 The API will return an object containing username, remaintime, and remaintraffic. Clients can see the connection name in their VPN client app.
 
@@ -60,7 +63,6 @@ Upcoming features:
 - Notification service
 - etc.
 
-
 ##License
 
 This project is licensed under the MIT License and comes with no guarantee. Feel free to use it in any way you see fit.
@@ -68,4 +70,7 @@ This project is licensed under the MIT License and comes with no guarantee. Feel
 ## Acknowledgements
 
 This project relies on the fantastic x-ui project. For more information, please visit https://github.com/vaxilu/x-ui.git.
-````
+
+```
+
+```
