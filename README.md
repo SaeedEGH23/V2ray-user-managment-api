@@ -22,7 +22,7 @@ Before using this API, you must have the following prerequisites:
 
 The API currently handles two requests:
 
-### Create User
+### Create new connection for User
 
 To create a trojan connection account, send a POST request to `serverip:port/createUser` with the following object:
 
@@ -39,7 +39,7 @@ Remark will change when the account is created. Period time is in days, and if s
 
 The API will return the trojan link.
 
-### Remain Check
+### Check connection data
 
 To retrieve connection data such as remaining time and traffic, send a POST request to `serverip:port/remainCheck` with the following object:
 
@@ -70,7 +70,3 @@ This project is licensed under the MIT License and comes with no guarantee. Feel
 ## Acknowledgements
 
 This project relies on the fantastic x-ui project. For more information, please visit https://github.com/vaxilu/x-ui.git.
-
-```
-
-```
