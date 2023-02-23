@@ -20,6 +20,12 @@ Before using this API, you must have the following prerequisites:
 
 ## Usage
 
+### Set header authorization for requests to api with JWT
+
+```js
+const token = jwt.sign({}, yoursecretkey);
+```
+
 The API currently handles two requests:
 
 ### Create new connection for User
@@ -56,7 +62,6 @@ The API will return an object containing username, remaintime, and remaintraffic
 Upcoming features:
 
 - Account renewal
-- Security improvements
 - Account creation limit
 - Increased traffic and remaining time
 - Logging
