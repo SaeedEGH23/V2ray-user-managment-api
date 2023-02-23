@@ -1,9 +1,13 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const checkAuthToken = require("./src/services/check-auth-token.js");
 const connections = require("./src/controller/connections.js");
 require("dotenv").config();
 const port = process.env.LISTEN_PORT;
+
+// Authentication check
+app.use("*", checkAuthToken);
 
 app.use(bodyParser.json());
 // configure routes
