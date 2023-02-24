@@ -15,21 +15,31 @@ app.get("/", (req, res) => {
   // route to controller
 });
 
-app.post("/createUser", (req, res) => {
-  // route to controller
+app.post("/createUser", async (req, res) => {
   const data = req.body;
-
-  connections
-    .createConnection(data)
-    .then((userLink) => {
-      res.status(200).send(userLink);
-      console.log(`userLink: ${userLink}`);
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).send("An error occurred while creating the user.");
-    });
+  try {
+    const userLink = await connections.createConnection(data);
+    res.status(200).send(userLink);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
 });
+
+// app.post("/createUser", (req, res) => {
+//   // route to controller
+//   const data = req.body;
+
+//   connections
+//     .createConnection(data)
+//     .then((userLink) => {
+//       res.status(200).send(userLink);
+//       console.log(`userLink: ${userLink}`);
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//       res.status(500).send("An error occurred while creating the user.");
+//     });
+// });
 
 app.post("/reSubscribe", (req, res) => {
   // route to controller
