@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const checkAuthToken = require("./src/services/check-auth-token.js");
 const connections = require("./src/controller/connections.js");
+const validate = require("./src/services/validator-income-req.js");
 require("dotenv").config();
 const port = process.env.LISTEN_PORT;
 
@@ -10,6 +11,9 @@ const port = process.env.LISTEN_PORT;
 app.use("*", checkAuthToken);
 
 app.use(bodyParser.json());
+
+app.use("/createUser", validate.middleInsValid);
+
 // configure routes
 app.get("/", (req, res) => {
   // route to controller
