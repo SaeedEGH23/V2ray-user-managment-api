@@ -15,8 +15,9 @@ const createConnection = async (data) => {
     resetXui();
     status += "user created !";
     return connectionLink;
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(`Model connections Creat err : ${err}`);
+    return err.message;
   }
 };
 
