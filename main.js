@@ -13,6 +13,7 @@ app.use("*", checkAuthToken);
 app.use(bodyParser.json());
 
 app.use("/createUser", validate.middleInsValid);
+app.use("/remainCheck", validate.middleGetDataValid);
 
 // configure routes
 app.get("/", (req, res) => {
