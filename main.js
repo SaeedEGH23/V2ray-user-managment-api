@@ -46,10 +46,14 @@ app.post("/createUser", async (req, res) => {
 //     });
 // });
 
-app.post("/reSubscribe", (req, res) => {
+app.post("/updateAccount", async (req, res) => {
   // route to controller
   const data = req.body;
-  res.status(200).send("ok");
+  try {
+    res.status(200).send(data);
+  } catch (err) {
+    res.status(500).send(`An erro occurred while check data ${err}`);
+  }
 });
 
 app.post("/remainCheck", async (req, res) => {
