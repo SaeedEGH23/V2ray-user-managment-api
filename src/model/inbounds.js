@@ -168,6 +168,20 @@ class inbounds {
       });
     });
   }
+
+  // update in inbound
+  static async updateConnectionField(field, value, remark) {
+    return new Promise((resolve, reject) => {
+      let sql = `UPDATE inbounds SET ${field} = ? WHERE remark = ?`;
+      db.run(sql, [value, remark], (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(true);
+        }
+      });
+    });
+  }
 }
 
 module.exports = inbounds;
