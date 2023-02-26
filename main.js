@@ -35,7 +35,8 @@ app.post("/updateAccount", async (req, res) => {
   // route to controller
   const data = req.body;
   try {
-    res.status(200).send(data);
+    const userUpdate = await connections.updateConnection(data);
+    res.status(200).send(userUpdate);
   } catch (err) {
     res.status(500).send(`An erro occurred while check data ${err}`);
   }
