@@ -45,6 +45,23 @@ Remark will change when the account is created. Period time is in days, and if s
 
 The API will return the trojan link.
 
+### Update a connection (Use it for resubscribe or etc)
+
+To update your time and traffic you can deffine package in your service with below object structure and send it az a POST request to `serverip:port/updateAccount`
+
+```json
+{
+  "remark": "connectionname",
+  "period": 1,
+  "traffic": 30
+}
+```
+
+Period 1 = 30 days
+Traffic 1 = 1 Gb
+
+Notice API return updated OBJ which is has username, remaintime ,remain traffic.
+
 ### Check connection data
 
 To retrieve connection data such as remaining time and traffic, send a POST request to `serverip:port/remainCheck` with the following object:
@@ -63,12 +80,11 @@ Upcoming features:
 
 - Account renewal
 - Account creation limit
-- Increased traffic and remaining time
 - Logging
 - Notification service
 - etc.
 
-##License
+## License
 
 This project is licensed under the MIT License and comes with no guarantee. Feel free to use it in any way you see fit.
 
