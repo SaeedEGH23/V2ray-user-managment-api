@@ -21,6 +21,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/createUser", async (req, res) => {
+  // route to controller
   const data = req.body;
   try {
     const userLink = await connections.createConnection(data);
@@ -29,22 +30,6 @@ app.post("/createUser", async (req, res) => {
     res.status(500).send(err.message);
   }
 });
-
-// app.post("/createUser", (req, res) => {
-//   // route to controller
-//   const data = req.body;
-
-//   connections
-//     .createConnection(data)
-//     .then((userLink) => {
-//       res.status(200).send(userLink);
-//       console.log(`userLink: ${userLink}`);
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//       res.status(500).send("An error occurred while creating the user.");
-//     });
-// });
 
 app.post("/updateAccount", async (req, res) => {
   // route to controller
