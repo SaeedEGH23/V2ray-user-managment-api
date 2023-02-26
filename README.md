@@ -74,12 +74,19 @@ To retrieve connection data such as remaining time and traffic, send a POST requ
 
 The API will return an object containing username, remaintime, and remaintraffic. Clients can see the connection name in their VPN client app.
 
+## Features
+
+- Create Account
+- Update Account
+- Get Account info
+- Account renewal
+- Account creation limit
+- Use JWT bearer tocken
+
 ## Roadmap
 
 Upcoming features:
 
-- Account renewal
-- Account creation limit
 - Logging
 - Notification service
 - etc.
