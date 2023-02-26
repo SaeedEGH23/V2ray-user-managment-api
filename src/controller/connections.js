@@ -1,5 +1,6 @@
 const createInsertRequest = require("../services/insert-connection.js");
 const getConnectionData = require("../services/show-connection-data.js");
+const updateUserConnection = require("../services/update-connection.js");
 const linkMaker = require("../util/trojan-link-maker.js");
 const resetXui = require("../util/reset-xui.js");
 const firewallAllow = require("../util/firewall-allow.js");
@@ -32,4 +33,14 @@ const connectionData = async (data) => {
   }
 };
 
-module.exports = { createConnection, connectionData };
+const updateConnection = async (data) => {
+  try {
+    let userData = await updateUserConnection(data);
+    console.log(`userdata in controller update ${userData}`);
+    return userData;
+  } catch (err) {
+    return err.message;
+  }
+};
+
+module.exports = { createConnection, connectionData, updateConnection };
