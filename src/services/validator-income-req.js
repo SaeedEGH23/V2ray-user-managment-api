@@ -7,12 +7,23 @@ const insertSchema = Joi.object().keys({
   traffic: Joi.number().required(),
 });
 
+// get json user data schema
 const getDataSchema = Joi.object().keys({
   cname: Joi.string().required(),
 });
 
 // use joi to validate income json
 const insertValidation = async (indata) => {
+  try {
+    const value = await insertSchema.validateAsync(indata);
+    console.log(value);
+    return value;
+  } catch (err) {
+    return err;
+  }
+};
+// update json data schema
+const updateValidationSchema = async (indata) => {
   try {
     const value = await insertSchema.validateAsync(indata);
     console.log(value);
@@ -37,6 +48,7 @@ const middleInsValid = async (req, res, next) => {
   }
 };
 
+// Check get user data json input validation
 const getDataValid = async (indata) => {
   try {
     const value = await getDataSchema.validateAsync(indata);
@@ -47,6 +59,7 @@ const getDataValid = async (indata) => {
   }
 };
 
+// middleware for get user data validation
 const middleGetDataValid = async (req, res, next) => {
   try {
     const validatedData = await getDataValid(req.body);
@@ -61,4 +74,30 @@ const middleGetDataValid = async (req, res, next) => {
   }
 };
 
-module.exports = { middleInsValid, middleGetDataValid };
+// check update account json input validation
+const updateAccountValid = async (indata) => {
+  try {
+    const value = await getDataSchema.validateAsync(indata);
+    console.log(value);
+    return value;
+  } catch (err) {
+    return err;
+  }
+};
+
+// middleware check update account validation
+const middleUpdateAccount = async (req, res, next) => {
+  try {
+    const validatedData = await updateAccountValid(req.body);
+    if (!validatedData.details) {
+      req.validatedData = validatedData;
+      next();
+    } else {
+      res.status(500).send(validatedData.details[0].message);
+    }
+  } catch (err) {
+    return err.message;
+  }
+};
+
+module.exports = { middleInsValid, middleGetDataValid, middleUpdateAccount };
