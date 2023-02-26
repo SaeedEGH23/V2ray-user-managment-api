@@ -1,6 +1,7 @@
 const Inbound = require("../model/inbounds.js");
 const timeSet = require("../util/timesetting.js");
 const setTraffic = require("../util/traffic.js");
+const getConnectionData = require("./show-connection-data.js");
 
 class Timeouterror extends Error {
   constructor(message) {
@@ -17,25 +18,41 @@ class Notexistcnn extends Error {
 }
 
 const updateConnection = async (data) => {
-  let updateTraffic, updatePeriod, enabling;
+  let updateTraffic, updatePeriod, enabling, traffic, makeZeroUp, makeZeroDown;
   try {
     let connection = await Inbound.findByRemark(data.remark);
-
+    console.log(`data.traffic:   ${data.traffic}`);
     // if connection exist
     if (connection) {
+      if (data.traffic) traffic = setTraffic("gb", data.traffic);
       // expire connection cant buy just traffic its check the situation
       if (connection.enable == 0 && data.period <= 0) {
         throw new Timeouterror();
       }
-      // sett traffic
+
       console.log(`connectionid : ${connection.id}`);
 
-      if (data.traffic > 0) {
-        let traffic = setTraffic("gb", data.period);
+      // update traddic
+      if (data.traffic >= 0) {
+        makeZeroDown = updateTraffic = await Inbound.updateConnectionField(
+          "down",
+          0,
+          data.remark
+        );
+
+        makeZeroUp = updateTraffic = await Inbound.updateConnectionField(
+          "up",
+          0,
+          data.remark
+        );
+
         updateTraffic = await Inbound.updateConnectionField(
           "total",
           traffic,
           data.remark
+        );
+        console.log(
+          `data trafffffffic: ${updateTraffic} , ${typeof traffic} , ${traffic}`
         );
         console.log(traffic);
       }
@@ -59,9 +76,9 @@ const updateConnection = async (data) => {
         );
         console.log(connection.enable);
       }
-      return await Inbound.findByRemark(data.remark);
+      let updated = { cname: data.remark };
+      return await getConnectionData(updated);
     } else throw new Notexistcnn();
-    console.log(connection.total);
   } catch (err) {
     console.log(err);
     return err.message;
