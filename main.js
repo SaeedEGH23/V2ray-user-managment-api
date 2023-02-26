@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 
 app.use("/createUser", validate.middleInsValid);
 app.use("/remainCheck", validate.middleGetDataValid);
+app.use("/updateAccount", validate.middleUpdateAccount);
 
 // configure routes
 app.get("/", (req, res) => {
