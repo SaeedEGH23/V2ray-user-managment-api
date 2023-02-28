@@ -17,9 +17,6 @@ app.use("/remainCheck", validate.middleGetDataValid);
 app.use("/updateAccount", validate.middleUpdateAccount);
 
 // configure routes
-app.get("/", (req, res) => {
-  // route to controller
-});
 
 app.post("/createUser", async (req, res) => {
   // route to controller
