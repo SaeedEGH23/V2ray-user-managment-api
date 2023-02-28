@@ -26,14 +26,14 @@ const updateConnection = async (data) => {
     if (connection) {
       if (data.traffic) traffic = setTraffic("gb", data.traffic);
       // expire connection cant buy just traffic its check the situation
-      if (connection.enable == 0 && data.period <= 0) {
+      if (connection.enable == 0 && !data.period) {
         throw new Timeouterror();
       }
 
       console.log(`connectionid : ${connection.id}`);
 
       // update traddic
-      if (data.traffic >= 0) {
+      if (data.traffic && data.traffic >= 0) {
         makeZeroDown = updateTraffic = await Inbound.updateConnectionField(
           "down",
           0,
