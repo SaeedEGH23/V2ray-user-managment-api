@@ -2,10 +2,10 @@
   "name": "v2ray-user-managment-api",
   "version": "1.0.0",
   "description": "Nodejs API for v2ray x-ui user connection managment",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pm2 start main.js"
+    "start": "pm2 start index.js"
   },
   "repository": {
     "type": "git",
