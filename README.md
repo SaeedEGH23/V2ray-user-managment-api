@@ -41,6 +41,7 @@ To create a trojan connection account, send a POST request to `serverip:port/cre
 }
 ```
 
+Notice: If period set 0 it mean unlimited expire time.
 Remark will change when the account is created. Period time is in days, and if set to 1, means 30 days remain until expiration. Protocol currently only supports trojan. Traffic is defined in GB.
 
 The API will return the trojan link.
@@ -60,7 +61,8 @@ To update your time and traffic you can deffine package in your service with bel
 Period 1 = 30 days
 Traffic 1 = 1 Gb
 
-Notice API return updated OBJ which is has username, remaintime ,remain traffic.
+Notice: for buy traffic to unlimited exp and enable account which has no traffic just send a JSON with remark: value , traffic: value.
+Notice: API will return an updated OBJ containing username, remaintime ,remain traffic.
 
 ### Check connection data
 
