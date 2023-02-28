@@ -3,7 +3,7 @@ const Joi = require("joi");
 // get json insert request schema
 const insertSchema = Joi.object().keys({
   remark: Joi.string().required(),
-  period: Joi.number().max(12).required(),
+  period: Joi.number().min(0).max(12).required(),
   protocol: Joi.valid("trojan", "vmess").required(),
   traffic: Joi.number().required(),
 });
@@ -11,7 +11,7 @@ const insertSchema = Joi.object().keys({
 // update data schema
 const updateDataSchema = Joi.object().keys({
   remark: Joi.string().required(),
-  period: Joi.number().min(0).max(12).required(),
+  period: Joi.number().min(0).max(12),
   traffic: Joi.number().min(1).max(100).required(),
 });
 
