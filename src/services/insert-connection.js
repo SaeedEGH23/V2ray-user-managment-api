@@ -39,7 +39,7 @@ const createInsertRequest = async (data) => {
   traffic = Number(data.traffic) || 30;
   remark = data.remark + connectionPortNumber;
   protocol = data.protocol || "trojan";
-  period = Number(data.period) || 1;
+  period = Number(data.period);
 
   const inbound = new Inbound({
     id: connectionPortNumber,
