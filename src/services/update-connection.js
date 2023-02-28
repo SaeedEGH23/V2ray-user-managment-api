@@ -56,11 +56,12 @@ const updateConnection = async (data) => {
         );
         console.log(traffic);
       }
-      if (data.period > 0) {
+      if (data.period >= 0) {
         let expTime =
           Date.now() > connection.expiry_time
             ? timeSet(data.period)
             : connection.expiry_time + data.period * (30 * 24 * 60 * 60 * 1000);
+        if (data.period == 0) expTime = 0;
         updatePeriod = await Inbound.updateConnectionField(
           "expiry_time",
           expTime,
@@ -68,7 +69,10 @@ const updateConnection = async (data) => {
         );
         console.log(expTime);
       }
-      if (connection.enable == 0 && data.period > 0) {
+      if (
+        (connection.enable == 0 && data.period >= 0) ||
+        (connection.enable == 0 && data.period == undefined)
+      ) {
         enabling = await Inbound.updateConnectionField(
           "enable",
           1,
