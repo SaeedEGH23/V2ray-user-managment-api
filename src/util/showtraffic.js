@@ -1,10 +1,12 @@
 // return traffic in gb
 const showTraffic = (value) => {
   if (value > 0) {
-    let MB = Math.trunc(value / 1024 / 1024);
-    let GB = Math.trunc(MB / 1024);
-    MB = MB % 1024;
-    return GB > 0 ? `${GB}.${Math.trunc(MB / 10)}GB` : `${MB}MB`;
+    let mb = Math.trunc(value / 1024 / 1024);
+    let gb = Math.trunc(mb / 1024);
+    mb = mb % 1024;
+    return gb > 0
+      ? JSON.stringify({ GB: gb, MB: mb })
+      : JSON.stringify({ GB: 0, MB: mb });
   } else return 0;
 };
 
