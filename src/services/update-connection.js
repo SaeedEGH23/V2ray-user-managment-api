@@ -2,6 +2,7 @@ const Inbound = require("../model/inbounds.js");
 const timeSet = require("../util/timesetting.js");
 const setTraffic = require("../util/traffic.js");
 const getConnectionData = require("./show-connection-data.js");
+const resetXui = require("../util/reset-xui.js");
 
 class Timeouterror extends Error {
   constructor(message) {
@@ -80,7 +81,9 @@ const updateConnection = async (data) => {
         );
         console.log(connection.enable);
       }
-      let updated = { cname: data.remark };
+      const updated = { cname: data.remark };
+      //Reset x-ui panel for submite changes
+      resetXui();
       return await getConnectionData(updated);
     } else throw new Notexistcnn();
   } catch (err) {
