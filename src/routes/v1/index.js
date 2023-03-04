@@ -1,19 +1,12 @@
-const express = require("express");
+const createUser = require("./creatUser.route");
 
+const express = require("express");
 const router = express.Router();
 
 const defaultRoutes = [
   {
-    path: "/creatUser",
-    route: creatUser,
-  },
-  {
-    path: "/remainCheck",
-    route: remainCheck,
-  },
-  {
-    path: "/updateAccount",
-    route: updateAccount,
+    path: "/createUser",
+    route: createUser,
   },
 ];
 
