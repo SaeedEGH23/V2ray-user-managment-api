@@ -9,7 +9,7 @@ const createMany = async (details) => {
       status = [];
 
     for (let i = 0; i < numberOf; i++) {
-      let connectionData = await create(details.inputData[i]);
+      let connectionData = await create(details.inputData);
       connectionLinks[i] = trojanLinkMaker(connectionData);
       status[i] = await firewallAllow(connectionData.cPort);
     }
@@ -30,12 +30,12 @@ module.exports = createMany;
 /* 
 details{
     numberOf: number,
-    inputData :[
+    inputData :
     {
     "remark":"remarkpathname",
     "period":number 0-12,
     "protocol":"trojan",
     "traffic":number for gb 0 is unlimited
-    }]
+    }
 }
 */
