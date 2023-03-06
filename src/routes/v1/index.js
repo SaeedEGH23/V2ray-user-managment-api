@@ -5,7 +5,7 @@ const router = express.Router();
 
 const defaultRoutes = [
   {
-    path: "/createUser",
+    path: "/user",
     route: createUser,
   },
 ];
