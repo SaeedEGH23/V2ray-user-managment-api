@@ -14,7 +14,7 @@ const createMany = async (details) => {
       status[i] = await firewallAllow(connectionData.cPort);
     }
 
-    // resetXui();
+    resetXui();
 
     console.log("this is create many service  => ", connectionLinks);
     console.log("this is create many service => ", status);
