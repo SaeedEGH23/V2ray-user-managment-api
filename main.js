@@ -18,7 +18,7 @@ app.use("/updateAccount", validate.middleUpdateAccount);
 
 // configure routes
 app.get("/", (req, res) => {
-  // route to controller
+  // route to controllerm
 });
 
 app.post("/createUser", async (req, res) => {
@@ -54,7 +54,7 @@ app.post("/remainCheck", async (req, res) => {
   }
 });
 
-app.post("/createManu", async (req, res) => {
+app.post("/createMany", async (req, res) => {
   // route to controller
   const data = req.body;
   try {
