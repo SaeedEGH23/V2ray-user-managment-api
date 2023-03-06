@@ -1,4 +1,5 @@
 const Joi = require("joi");
+const insertValidation = require("../validations/connection.validation");
 
 // const validate = (schema) => (req, res, next) => {
 //   const validSchema = pick(schema, ['params', 'query', 'body']);
@@ -29,6 +30,17 @@ const valide = (schema) => async (req, res, next) => {
     next();
   }
 };
+
+// const valide = (validSchema) => (req, res, next) => {
+//   const { value, error } = Joi.valid(validSchema);
+
+//   if (error) {
+//     const errorMessage = error.details;
+//     res.status(402).send(errorMessage);
+//   }
+
+//   return next();
+// };
 
 // const valide = (schema) => (req, res, next) => {
 //   try {
