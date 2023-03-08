@@ -8,6 +8,29 @@ const insertSchema = Joi.object().keys({
   traffic: Joi.number().required(),
 });
 
+// Create many
+/* 
+details{
+    numberOf: number,
+    inputData :
+    {
+    "remark":"remarkpathname",
+    "period":number 0-12,
+    "protocol":"trojan",
+    "traffic":number for gb 0 is unlimited
+    }
+}
+*/
+const createManyShema = Joi.object().keys({
+  numberOf: Joi.number().min(1).required(),
+  inputData: Joi.object({
+    remark: Joi.string().required(),
+    period: Joi.number().min(0).max(12).required(),
+    protocol: Joi.valid("trojan", "vmess").required(),
+    traffic: Joi.number().required(),
+  }).required(),
+});
+
 // update data schema
 const updateDataSchema = Joi.object().keys({
   remark: Joi.string().required(),
@@ -98,4 +121,34 @@ const middleUpdateAccount = async (req, res, next) => {
   }
 };
 
-module.exports = { middleInsValid, middleGetDataValid, middleUpdateAccount };
+// Check Create many req structure
+const createManyValide = async (indata) => {
+  try {
+    const value = await createManyShema.validateAsync(indata);
+    console.log(value);
+    return value;
+  } catch (err) {
+    return err;
+  }
+};
+// middleware Create many
+const middleCreateMany = async (req, res, next) => {
+  try {
+    const validatedData = await createManyValide(req.body);
+    if (!validatedData.details) {
+      req.validatedData = validatedData;
+      next();
+    } else {
+      res.status(500).send(validatedData.details[0].message);
+    }
+  } catch (err) {
+    return err.message;
+  }
+};
+
+module.exports = {
+  middleInsValid,
+  middleGetDataValid,
+  middleUpdateAccount,
+  middleCreateMany,
+};
