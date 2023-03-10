@@ -66,6 +66,19 @@ app.post("/createMany", async (req, res) => {
   }
 });
 
+app.post("/disableMany", async (req, res) => {
+  // route to controller
+  const data = req.body;
+  try {
+    const disabledConnectionsList = await connections.disableManyConnection(
+      data
+    );
+    res.status(200).send(disabledConnectionsList);
+  } catch (err) {
+    res.status(500).send(`An erro occurred while check data ${err}`);
+  }
+});
+
 // Handle 404
 app.all("*", (req, res) => {
   res.status(404).send({
