@@ -16,6 +16,7 @@ app.use("/createUser", validate.middleInsValid);
 app.use("/remainCheck", validate.middleGetDataValid);
 app.use("/updateAccount", validate.middleUpdateAccount);
 app.use("/createMany", validate.middleCreateMany);
+app.use("/disableMany", validate.middleDisableMany);
 
 // configure routes
 app.get("/", (req, res) => {
