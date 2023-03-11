@@ -8,6 +8,16 @@ const insertSchema = Joi.object().keys({
   traffic: Joi.number().required(),
 });
 
+// disable many schema
+/* 
+      {
+        remarks:['remark1', 'remark2']
+    }
+*/
+const disableMany = Joi.object().keys({
+  remarks: Joi.array().items(Joi.string()).required(),
+});
+
 // Create many
 /* 
 details{
@@ -146,9 +156,36 @@ const middleCreateMany = async (req, res, next) => {
   }
 };
 
+// Check Disable many req structure
+const disableManyValide = async (indata) => {
+  try {
+    const value = await disableMany.validateAsync(indata);
+    console.log(value);
+    return value;
+  } catch (err) {
+    return err;
+  }
+};
+
+// middleware disable many
+const middleDisableMany = async (req, res, next) => {
+  try {
+    const validatedData = await disableManyValide(req.body);
+    if (!validatedData.details) {
+      req.validatedData = validatedData;
+      next();
+    } else {
+      res.status(500).send(validatedData.details[0].message);
+    }
+  } catch (err) {
+    return err.message;
+  }
+};
+
 module.exports = {
   middleInsValid,
   middleGetDataValid,
   middleUpdateAccount,
   middleCreateMany,
+  middleDisableMany,
 };
