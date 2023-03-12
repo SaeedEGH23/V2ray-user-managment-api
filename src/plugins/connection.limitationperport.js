@@ -3,6 +3,8 @@ const cron = require("node-cron");
 const { exec } = require("node:child_process");
 const Inbound = require("../model/inbounds");
 const fs = require("fs");
+const resetX = require("../util/reset-xui.js");
+const { stat } = require("node:fs");
 
 const limitation = 3;
 // log theme
@@ -85,11 +87,14 @@ const disabler = async () => {
         }
       }
     }
+    if (disableRemarks.length) return 1;
+    else return 0;
   } catch (err) {
     return err;
   }
 };
 
-cron.schedule("*/10 * * * *", () => {
-  disabler();
+cron.schedule("*/10 * * * *", async () => {
+  const status = await disabler();
+  if (status) resetX();
 });
