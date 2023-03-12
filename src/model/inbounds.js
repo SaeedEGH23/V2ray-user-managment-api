@@ -196,6 +196,20 @@ class inbounds {
       });
     });
   }
+
+  // update filds
+  static async conditionalUpdate(fieldFirst, value, fieldSecound, newvalue) {
+    return new Promise((resolve, reject) => {
+      let sql = `UPDATE inbounds SET ${fieldSecound} = ${newvalue} WHERE ${fieldFirst} = ${value}`;
+      db.run(sql, (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(true);
+        }
+      });
+    });
+  }
 }
 
 module.exports = inbounds;
