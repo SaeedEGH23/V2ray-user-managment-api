@@ -1,3 +1,4 @@
+// ______________! important first install node-cron for running plugins seperately
 const cron = require("node-cron");
 const { exec } = require("node:child_process");
 const Inbound = require("../model/inbounds");
