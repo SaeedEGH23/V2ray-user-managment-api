@@ -87,6 +87,10 @@ const disabler = async () => {
         }
       }
     }
+    try {
+      logger(disableRemarks);
+    } catch (err) {}
+
     if (disableRemarks.length) return 1;
     else return 0;
   } catch (err) {
