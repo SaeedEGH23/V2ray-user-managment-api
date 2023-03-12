@@ -182,6 +182,20 @@ class inbounds {
       });
     });
   }
+
+  // return all enable ports
+  static async enablePorts() {
+    return new Promise((resolve, reject) => {
+      const sql = `SELECT port FROM inbounds WHERE enable = 1`;
+      db.all(sql, [], (error, rows) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(rows);
+        }
+      });
+    });
+  }
 }
 
 module.exports = inbounds;
