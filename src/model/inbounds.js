@@ -183,10 +183,10 @@ class inbounds {
     });
   }
 
-  // return all enable ports
-  static async enablePorts() {
+  // return all value of a field which has field with specific value
+  static async getData(field, value) {
     return new Promise((resolve, reject) => {
-      const sql = `SELECT port FROM inbounds WHERE enable = 1`;
+      const sql = `SELECT ${field} FROM inbounds WHERE ${value}`;
       db.all(sql, [], (error, rows) => {
         if (error) {
           reject(error);
