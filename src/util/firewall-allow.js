@@ -2,7 +2,7 @@ const { exec } = require("child_process");
 
 // Check if UFW is enabled
 const allower = (port) => {
-  exec("sudo ufw status", (error, stdout, stderr) => {
+  exec("ufw status", (error, stdout, stderr) => {
     if (error) {
       console.error(`Error checking UFW status: ${error}`);
       return;
@@ -18,7 +18,7 @@ const allower = (port) => {
       console.log("UFW is enabled");
 
       // Allow incoming traffic on the specified port
-      exec(`sudo ufw allow ${port}`, (error, stdout, stderr) => {
+      exec(`ufw allow ${port}`, (error, stdout, stderr) => {
         if (error) {
           console.error(`Error allowing port ${port}: ${error}`);
           return;
