@@ -49,12 +49,13 @@ const allower = (port) => {
     exec("ufw status", (error, stdout, stderr) => {
       if (error) {
         console.error(`Error checking UFW status: ${error}`);
-        return;
+        rejects(error);
       }
 
       if (stderr) {
         console.error(`UFW status error: ${stderr}`);
-        return;
+
+        rejects(stderr);
       }
 
       // Check if UFW is active/enabled
@@ -65,23 +66,24 @@ const allower = (port) => {
         exec(`ufw allow ${port}`, (error, stdout, stderr) => {
           if (error) {
             console.error(`Error allowing port ${port}: ${error}`);
-            return;
+            rejects(error);
           }
 
           if (stderr) {
             console.error(`Error allowing port ${port}: ${stderr}`);
-            return;
+            rejects(stderr);
           }
 
           if (stdout) {
             console.log(stdout);
-            return;
+            resolve(stdout);
           }
 
           console.log(`Port ${port} allowed`);
         });
       } else {
         console.log("UFW is not enabled");
+        rejects("function has problem");
       }
     });
   });
