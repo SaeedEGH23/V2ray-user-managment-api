@@ -14,7 +14,7 @@ const allower = (port) => {
     }
 
     // Check if UFW is active/enabled
-    if (stdout.includes("Status: active")) {
+    if (stdout.includes("active")) {
       console.log("UFW is enabled");
 
       // Allow incoming traffic on the specified port
@@ -26,6 +26,11 @@ const allower = (port) => {
 
         if (stderr) {
           console.error(`Error allowing port ${port}: ${stderr}`);
+          return;
+        }
+
+        if (stdout) {
+          console.log(stdout);
           return;
         }
 
