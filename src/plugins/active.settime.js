@@ -3,9 +3,10 @@
 // before run it install dependency with "npm install node-cron"
 const cron = require("node-cron");
 const sqlite3 = require("sqlite3").verbose();
+require("dotenv").config();
 
 const tableName = "inbounds";
-const dbPath = "./x-ui.db"; // set db path here
+const dbPath = process.env.DB_PATH || "./x-ui.db"; // set db path here
 const period = 1; //it means set 1 month to connection which started use
 
 // Connect to the SQLite3 database
