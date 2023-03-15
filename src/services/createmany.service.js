@@ -11,7 +11,11 @@ const createMany = async (details) => {
     for (let i = 0; i < numberOf; i++) {
       let connectionData = await create(details.inputData);
       connectionLinks[i] = trojanLinkMaker(connectionData);
-      status[i] = await firewallAllow(connectionData.cPort);
+      try {
+        status[i] = await firewallAllow(connectionData.cPort);
+      } catch (err) {
+        status[i] = err.message;
+      }
     }
 
     resetXui();
