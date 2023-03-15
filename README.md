@@ -76,9 +76,28 @@ To retrieve connection data such as remaining time and traffic, send a POST requ
 
 The API will return an object containing username, remaintime, and remaintraffic. Clients can see the connection name in their VPN client app.
 
+### Create multiple accounts with one request
+
+For create multiple account with one request you have to set a POST request `serverip:port/createMany` with following object:
+
+```json
+{
+  "numberOf": 2, //number of account you want to create
+  "inputData": {
+    "remark": "remarkpathnames", //path name of accountes
+    "period": 1, //period * 30 days
+    "protocol": "trojan", //protocol
+    "traffic": 10 //traffic in gb
+  }
+}
+```
+
+It will response with an array contains all created links.
+
 ## Features
 
 - Create Account
+- Create multiple account with one request
 - Update Account
 - Get Account info
 - Account renewal
