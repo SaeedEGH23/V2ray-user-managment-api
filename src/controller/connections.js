@@ -13,8 +13,13 @@ const createConnection = async (data) => {
     console.log("userdata is here : ", userData);
 
     let connectionLink = await linkMaker(userData);
+    let status;
+    try {
+      status = await firewallAllow(userData.cPort);
+    } catch (err) {
+      console.log(`Controller ufw active line ${err}`);
+    }
 
-    let status = await firewallAllow(userData.cPort);
     resetXui();
     status += "user created !";
     return connectionLink;
