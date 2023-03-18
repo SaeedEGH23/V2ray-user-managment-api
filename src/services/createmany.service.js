@@ -2,9 +2,30 @@ const create = require("./insert-connection.js");
 const trojanLinkMaker = require("../util/trojan-link-maker.js");
 const resetXui = require("../util/reset-xui.js");
 const firewallAllow = require("../util/firewall-allow.js");
+const Inbound = require("../model/inbounds");
+const limiteDefine = {
+  all: process.env.GLOBAL_LIMITATION || 0,
+  enable: process.env.ENLABLED_LIMITATION || 0,
+};
 const createMany = async (details) => {
   try {
     const numberOf = details.numberOf;
+
+    const allEnables = await Inbound.getTotalEnableInbounds();
+    const allConnections = await Inbound.getTotalInbounds();
+    if (limiteDefine.all != 0 || limiteDefine.enable != 0) {
+      if (allEnables + numberOf > limiteDefine.enable) {
+        return `You just can create ${
+          limiteDefine.enable - allEnables
+        } enable connections`;
+      }
+      if (allConnections + numberOf > limiteDefine.all) {
+        return `You just can create ${
+          limiteDefine.all - allConnections
+        } connections`;
+      }
+    }
+
     let connectionLinks = [],
       status = [];
 
