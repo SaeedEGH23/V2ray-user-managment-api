@@ -94,10 +94,23 @@ For create multiple account with one request you have to set a POST request `ser
 
 It will response with an array contains all created links.
 
+### Disable multiple accounts with one request
+
+Make a post requesst to `serverip:port/disableMany` which is contain an object of remarks name in an array ,you want to disable:
+
+```json
+{
+  "remarks": ["test-1", "test", "test3"]
+}
+```
+
+It'll disable all remarks you wrote and will return an array of success disabled.
+
 ## Features
 
 - Create Account
-- Create multiple account with one request
+- Create multiple accounts with one request
+- Disable multiple accounts with one request
 - Update Account
 - Get Account info
 - Account renewal
