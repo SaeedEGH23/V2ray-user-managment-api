@@ -1,6 +1,9 @@
 const Inbound = require("../model/inbounds.js");
 const showTraffic = require("../util/showtraffic.js");
 const showremaintime = require("../util/showremaintime.js");
+require("dotenv").config();
+const enableLimitationConnection = process.env.ENLABLED_LIMITATION || 0;
+const allLimitationConnection = process.env.GLOBAL_LIMITATION || 0;
 
 const getConnectionData = async (remark) => {
   try {
@@ -21,6 +24,23 @@ const getConnectionData = async (remark) => {
     return dataInbound;
   } catch (err) {
     return err;
+  }
+};
+
+const getAllConnectionsData = async () => {
+  try {
+    const enables = await Inbound.getTotalEnableInbounds();
+    const allConnections = await Inbound.getTotalInbounds();
+    let data = {
+      enableConnections: enables,
+      allConnections: allConnections,
+      enableRemainToCreate: enableLimitationConnection - enables,
+      allRemainToCreate: allLimitationConnection - allConnections,
+    };
+    return data;
+  } catch (err) {
+    console.log(err.message);
+    return err.message;
   }
 };
 
