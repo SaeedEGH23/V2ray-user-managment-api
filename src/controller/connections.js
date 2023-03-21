@@ -31,7 +31,7 @@ const createConnection = async (data) => {
 
 const connectionData = async (data) => {
   try {
-    let userData = await getConnectionData(data);
+    let userData = await getConnectionData.getConnectionData(data);
     console.log(userData);
     return userData;
   } catch (err) {
