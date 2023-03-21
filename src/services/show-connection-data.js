@@ -44,4 +44,4 @@ const getAllConnectionsData = async () => {
   }
 };
 
-module.exports = getConnectionData;
+module.exports = { getConnectionData, getAllConnectionsData };
