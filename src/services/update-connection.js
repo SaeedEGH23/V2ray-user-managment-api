@@ -84,7 +84,7 @@ const updateConnection = async (data) => {
       const updated = { cname: data.remark };
       //Reset x-ui panel for submite changes
       resetXui();
-      return await getConnectionData(updated);
+      return await getConnectionData.getConnectionData(updated);
     } else throw new Notexistcnn();
   } catch (err) {
     console.log(err);
