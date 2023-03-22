@@ -56,6 +56,17 @@ app.post("/remainCheck", async (req, res) => {
   }
 });
 
+app.get("/remaincheckall", async (req, res) => {
+  // route to controller
+  // const data = req.body;
+  try {
+    const retData = await connections.allConnectionData();
+    res.status(200).send(retData);
+  } catch (err) {
+    res.status(500).send(`An erro occurred while check data ${err}`);
+  }
+});
+
 app.post("/createMany", async (req, res) => {
   // route to controller
   const data = req.body;
