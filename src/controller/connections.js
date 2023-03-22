@@ -40,6 +40,17 @@ const connectionData = async (data) => {
   }
 };
 
+const allConnectionData = async () => {
+  try {
+    let connectionsData = await getConnectionData.getAllConnectionsData();
+    console.log(connectionsData);
+    return connectionsData;
+  } catch (err) {
+    console.log(err.message);
+    return err.message;
+  }
+};
+
 const updateConnection = async (data) => {
   try {
     let userData = await updateUserConnection(data);
@@ -77,4 +88,5 @@ module.exports = {
   updateConnection,
   createManyConnections,
   disableManyConnection,
+  allConnectionData,
 };
