@@ -104,6 +104,19 @@ Make a post requesst to `serverip:port/disableMany` which is contain an object o
 }
 ```
 
+### Get number of all connections & enable connections and remains to limite
+
+Send a get requesst to `serverip:port/remaincheckall` api returns a json like below
+
+```json
+{
+  "enableConnections": 326, //Type = number
+  "allConnections": 333, //Type = number
+  "enableRemainToCreate": 174, //Type = number
+  "allRemainToCreate": 267 //Type = number
+}
+```
+
 It'll disable all remarks you wrote and will return an array of success disabled.
 
 ## Features
