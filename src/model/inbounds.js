@@ -108,6 +108,20 @@ class inbounds {
       });
     });
   }
+  // get all connections data
+  static async returnAllData() {
+    const sql = `SELECT * FROM inbounds`;
+
+    return new Promise((resolve, reject) => {
+      db.get(sql, function (err, row) {
+        if (err) {
+          reject(err.message);
+        } else {
+          resolve(row);
+        }
+      });
+    });
+  }
 
   static async findByPort(port) {
     const sql = `SELECT * FROM inbounds WHERE port = ?`;
