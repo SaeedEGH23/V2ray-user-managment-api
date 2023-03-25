@@ -113,11 +113,11 @@ class inbounds {
     const sql = `SELECT * FROM inbounds`;
 
     return new Promise((resolve, reject) => {
-      db.get(sql, function (err, row) {
+      db.all(sql, function (err, rows) {
         if (err) {
           reject(err.message);
         } else {
-          resolve(row);
+          resolve(rows);
         }
       });
     });
