@@ -113,7 +113,23 @@ Send a get requesst to `serverip:port/remaincheckall` api returns a json like be
   "enableConnections": 326, //Type = number
   "allConnections": 333, //Type = number
   "enableRemainToCreate": 174, //Type = number
-  "allRemainToCreate": 267 //Type = number
+  "allRemainToCreate": 267, //Type = number
+  "enables": [
+    {
+      "remark": "remarks",
+      "totalusage": "{\"GB\":12,\"MB\":44}",
+      "expiretime": "Account EXP after: 29 Days and 10 Hours",
+      "port": 35443
+    }
+  ],
+  "disables": [
+    {
+      "remark": "remarks",
+      "totalusage": "{\"GB\":12,\"MB\":44}",
+      "expiretime": "Account EXP after: 29 Days and 10 Hours",
+      "port": 35443
+    }
+  ]
 }
 ```
 
