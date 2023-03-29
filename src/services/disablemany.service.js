@@ -13,7 +13,8 @@ const disabler = async (data) => {
     }
     resetXui();
     console.log(`Logger disableManyService ${disabled_connections}`);
-    return disabled_connections;
+    data = { disable_connections: disabled_connections };
+    return data;
   } catch (err) {
     console.log(`This is alog from disableManyService ${err.message}`);
     return err.message;
