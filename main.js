@@ -1,4 +1,5 @@
 const express = require("express");
+const fs = require("fs");
 const app = express();
 const bodyParser = require("body-parser");
 const checkAuthToken = require("./src/services/check-auth-token.js");
@@ -101,4 +102,8 @@ app.all("*", (req, res) => {
 // start listening
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
+});
+
+process.on("uncaughtException", (err) => {
+  fs.writeFileSync("./unexpectederror.txt", err, "utf-8");
 });
