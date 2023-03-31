@@ -4,6 +4,7 @@ const crypto = require("crypto");
 const setTraffic = require("../util/traffic.js");
 const portGenerator = require("../util/portgenerator.js");
 const { resolve } = require("path");
+const sniffingOption = process.env.SNIFFING === "false" ? false : true;
 
 require("dotenv").config();
 
@@ -82,7 +83,7 @@ const createInsertRequest = async (data) => {
     }),
     tag: `inbound-${connectionPortNumber}`,
     sniffing: JSON.stringify({
-      enabled: false,
+      enabled: sniffingOption,
       destOverride: ["http", "tls"],
     }),
   });
